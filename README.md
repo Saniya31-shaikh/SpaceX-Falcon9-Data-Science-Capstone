@@ -1,164 +1,244 @@
-# SpaceX Falcon 9 Landing Prediction — Data Science Capstone
+# SpaceX Falcon 9 Data Science Capstone
 
-**IBM Data Science Professional Certificate | Coursera**
+This project was completed as part of the **IBM Data Science Professional Certificate Capstone** on Coursera.
 
-## Project Overview
+The objective is to analyze historical SpaceX Falcon 9 launches and use machine learning to predict the first-stage landing classification. The project covers data collection, preprocessing, exploratory data analysis, SQL, interactive visualizations, geospatial analysis, and machine learning.
 
-This project was completed as part of the IBM Data Science Capstone course on Coursera. The objective is to analyze historical SpaceX Falcon 9 launch data and develop machine learning models to predict booster landing classifications.
+## Project Objectives
 
-The project covers data collection, preprocessing, SQL analysis, exploratory data analysis, geospatial visualization, interactive dashboard development, and machine learning.
+- Collect and prepare SpaceX launch data.
+- Analyze launch sites, payload mass, orbit types, and booster characteristics.
+- Explore patterns associated with landing classifications.
+- Visualize launch locations using Folium.
+- Develop an interactive dashboard using Plotly Dash.
+- Train and evaluate machine learning classification models.
+
+## Technologies Used
+
+**Programming:** Python, SQL
+
+**Libraries:** Pandas, NumPy, Matplotlib, Seaborn, Plotly, Folium, Scikit-learn
+
+**Tools:** Google Colab, Jupyter Notebook, SQLite, VS Code, GitHub
+
+**Dashboard:** Plotly Dash
 
 ## Dataset
 
-I worked with two datasets:
+The machine learning analysis uses the historical SpaceX Falcon 9 dataset provided through the IBM course.
 
-**1. Historical SpaceX Launch Dataset (2010–2020)**
+| Dataset Information | Value |
+|---|---|
+| Historical records | 90 |
+| Original features | 17 |
+| Target column | Class |
+| Class 0 records | 11 |
+| Class 1 records | 79 |
+| Historical period | 2010–2020 |
+| Unique launch sites | 3 |
 
-- 90 Falcon 9 launch records
-- 18 columns after adding the target variable
-- Includes launch site, payload mass, orbit, booster information, and landing outcome
-- Used for SQL analysis, EDA, geospatial visualization, dashboard development, and machine learning
+The target variable `Class` follows the IBM course's landing-outcome classification convention. Class 0 represents specified unsuccessful landing outcomes, while Class 1 represents the remaining outcomes under that convention. Class 1 should not be interpreted as independently verified successful landings in every case.
 
-**2. Wikipedia Web-Scraped Dataset (2025)**
+A separate dataset containing 165 launches from 2025 was collected through Wikipedia web scraping. This dataset was analyzed separately and was not used for machine learning training.
 
-- 165 launch records
-- Extracted from a Wikipedia Falcon 9 launch table
-- Cleaned and organized using Python and Pandas
-- Used to demonstrate web scraping and data preparation
+## Project Implementation
 
-The historical dataset was obtained from IBM's course-hosted data after the direct SpaceX API request encountered a connection error.
+### Notebook 01 — SpaceX Data Collection and Preparation
 
-The binary target variable, `Class`, follows the labeling convention used in the course dataset. Class 1 includes some records without confirmed landing outcomes and should not be interpreted as a count of verified successful landings.
+- Worked with the historical SpaceX launch dataset.
+- Examined the dataset structure and missing values.
+- Converted date information into the appropriate format.
+- Created the binary target variable `Class`.
+- Saved the processed dataset as `spacex_launches_processed.csv`.
 
-## Tools and Technologies
+### Notebook 02 — Web Scraping
 
-- **Programming:** Python
-- **Data Processing:** Pandas, NumPy
-- **Database Analysis:** SQLite, SQL
-- **Visualization:** Matplotlib, Seaborn, Plotly Express
-- **Geospatial Analysis:** Folium
-- **Dashboard Development:** Plotly Dash
-- **Machine Learning:** Scikit-learn
-- **Development Environments:** Google Colab, Jupyter Notebook, VS Code
-- **Version Control:** GitHub
+- Extracted SpaceX launch records from Wikipedia using Python.
+- Cleaned launch dates, payload information, and landing outcomes.
+- Processed 165 launch records from 2025.
+- Saved the results as `spacex_web_scraped_cleaned.csv`.
 
-## Project Workflow
+### Notebook 03 — SQL Exploratory Data Analysis
 
-### 1. Data Collection
+Used SQLite and SQL queries to investigate:
 
-Explored the SpaceX API and prepared the historical Falcon 9 launch dataset for analysis.
+- Launch frequency by site.
+- Payload mass distribution.
+- Landing classifications by launch site.
+- Orbit characteristics.
+- Booster reuse and flight history.
 
-### 2. Web Scraping
+### Notebook 04 — Exploratory Data Analysis and Visualization
 
-Extracted launch information from Wikipedia and cleaned the resulting records into a structured dataset.
+Used Pandas, Matplotlib, and Seaborn to analyze relationships between landing classifications and:
 
-### 3. SQL Analysis
+- Payload mass.
+- Flight number.
+- Launch site.
+- Orbit type.
+- Booster reuse.
+- Booster block version.
 
-Used SQL queries to investigate launch-site distributions, payload characteristics, booster reuse, and landing classifications.
+Generated statistical visualizations and correlation analysis.
 
-### 4. Exploratory Data Analysis
+### Notebook 05 — Folium Geospatial Analysis
 
-Created visualizations to examine relationships between payload mass, launch site, orbit, flight number, booster characteristics, and landing classification.
+Created interactive maps to visualize Falcon 9 launch locations.
 
-### 5. Geospatial Analysis
+The project includes:
 
-Developed interactive Folium maps showing launch-site locations, geographical clusters, classification distributions, and the distance between Florida launch sites.
+- Launch site location map.
+- Landing classification map.
+- Launch marker clustering.
+- Florida launch site distance map.
 
-### 6. Interactive Dashboard
+The calculated distance between Kennedy Space Center LC-39A and Cape Canaveral SLC-40 was approximately **5.76 km**, based on the dataset coordinates.
 
-Built a Plotly Dash application with:
+The generated HTML maps are available in the `maps/` folder.
 
-- Launch-site dropdown filter
-- Landing-classification pie chart
-- Payload-range slider
-- Interactive scatter plot
+### Notebook 06 — Plotly Dash Dashboard
 
-### 7. Machine Learning
+Developed a Python dashboard application for exploring Falcon 9 launch classifications.
 
-Implemented a machine learning workflow for predicting the binary landing classification, including feature preprocessing, model training, evaluation, and comparison.
+Dashboard components include:
 
-## Exploratory Findings
+- Launch site selection dropdown.
+- Classification distribution pie chart.
+- Payload mass range slider.
+- Interactive scatter plot.
 
-The historical dataset contains 90 launch records from three launch sites.
+The dashboard source code is available in `dashboard/spacex_dashboard.py`.
 
-| Launch Site | Total Launches | Class 1 Records |
-|---|---:|---:|
-| CCAFS SLC 40 | 55 | 47 |
-| KSC LC 39A | 22 | 21 |
-| VAFB SLC 4E | 13 | 11 |
-
-Overall, 79 records belong to Class 1 and 11 records belong to Class 0.
-
-KSC LC 39A had the highest proportion of Class 1 records in this dataset, approximately 95.45%.
-
-These results describe the historical course dataset and should not be generalized to all SpaceX launches.
-
-## Repository Structure
-
-```text
-SpaceX-Falcon9-Data-Science-Capstone/
-│
-├── notebooks/
-│   ├── SpaceX_01_API_Data_Collection.ipynb
-│   ├── 02_SpaceX_Web_Scraping.ipynb
-│   ├── 03_SpaceX_SQL_Analysis.ipynb
-│   ├── 04_SpaceX_EDA_Visualization.ipynb
-│   ├── 05_SpaceX_Folium_Geospatial_Analysis (1).ipynb
-│   ├── 06_SpaceX_Plotly_Dash_Dashboard.ipynb
-│   └── 07_SpaceX_Machine_Learning.ipynb
-│
-├── data/
-│   ├── spacex_launches_processed.csv
-│   └── spacex_web_scraped_cleaned.csv
-│
-├── dashboard/
-│   ├── spacex_dashboard.py
-│   └── README.md
-│
-├── maps/
-│   ├── spacex_launch_sites.html
-│   ├── spacex_landing_clusters.html
-│   ├── spacex_classification_map.html
-│   ├── spacex_florida_distance.html
-│   └── README.md
-│
-├── README.md
-└── .gitignore
-```
-
-## Running the Project
-
-### Jupyter Notebooks
-
-The analysis notebooks can be opened using Google Colab or Jupyter Notebook.
-
-Some notebooks require uploading the corresponding CSV files from the `data/` directory.
-
-### Dash Application
-
-Install the required packages:
-
-```bash
-pip install pandas plotly dash
-```
-
-Run the dashboard from the repository root:
+To run the dashboard locally, install the required dependencies and execute:
 
 ```bash
 python dashboard/spacex_dashboard.py
 ```
 
-Open the following address in your browser:
+The application is configured to run locally at `http://127.0.0.1:8050/`.
 
-`http://127.0.0.1:8050/`
+### Notebook 07 — Machine Learning Prediction
 
-## Limitations
+The final notebook focuses on building and evaluating classification models.
 
-- The historical analysis is based on a relatively small dataset of 90 records.
-- The target classification follows IBM's course convention and does not always indicate a confirmed landing.
-- The 2025 web-scraped dataset was analyzed separately and was not used for model training.
-- Machine learning performance should be interpreted with consideration of class imbalance and dataset size.
+**Data preparation**
 
-## Acknowledgment
+- Selected nine predictor variables.
+- Excluded outcome-related and identifier fields to reduce potential data leakage.
+- Used an 80% training and 20% testing split.
+- Applied stratified sampling to preserve class proportions.
+- Used preprocessing pipelines for numerical and categorical features.
 
-This project was
+**Machine learning algorithms**
+
+1. Logistic Regression
+2. Support Vector Machine (SVM)
+3. Decision Tree
+4. K-Nearest Neighbors (KNN)
+
+Hyperparameter tuning was performed using GridSearchCV with five-fold stratified cross-validation. Balanced accuracy was used for model selection because the dataset is imbalanced.
+
+## Machine Learning Results
+
+### Cross-Validation Results
+
+| Model | CV Balanced Accuracy |
+|---|---:|
+| Decision Tree | 0.837 |
+| Support Vector Machine | 0.679 |
+| Logistic Regression | 0.656 |
+| K-Nearest Neighbors | 0.618 |
+
+The **Decision Tree** achieved the highest cross-validation balanced accuracy and was selected by the training-stage model selection procedure.
+
+### Held-Out Test Results
+
+| Model | Accuracy | Balanced Accuracy | ROC-AUC |
+|---|---:|---:|---:|
+| Logistic Regression | 0.833 | 0.906 | 0.906 |
+| K-Nearest Neighbors | 0.833 | 0.688 | 0.656 |
+| Support Vector Machine | 0.722 | 0.625 | 0.875 |
+| Decision Tree | 0.667 | 0.594 | 0.766 |
+
+Although Decision Tree performed best during cross-validation, **Logistic Regression achieved the highest balanced accuracy on the held-out test set**.
+
+### Selected Decision Tree Evaluation
+
+| Evaluation Metric | Result |
+|---|---:|
+| Training CV Balanced Accuracy | 0.837 |
+| Test Accuracy | 0.667 |
+| Test Balanced Accuracy | 0.594 |
+| Test ROC-AUC | 0.766 |
+| Test Average Precision (Class 1) | 0.958 |
+
+The Decision Tree confusion matrix was:
+
+| Actual / Predicted | Class 0 | Class 1 |
+|---|---:|---:|
+| Class 0 | 1 | 1 |
+| Class 1 | 5 | 11 |
+
+The evaluation included a confusion matrix, ROC curve, precision-recall curve, and model comparison chart.
+
+## Key Findings
+
+- The historical dataset contains substantially more Class 1 observations than Class 0 observations.
+- Launch site, payload mass, and booster characteristics were explored as potential predictors.
+- Decision Tree achieved the strongest balanced accuracy during training cross-validation.
+- Logistic Regression performed better on the held-out test set.
+- The differences between cross-validation and test results demonstrate the importance of evaluating models on unseen data.
+- Results should be interpreted cautiously because the dataset contains only 90 records, including 11 Class 0 observations.
+
+## Repository Structure
+
+```text
+SpaceX-Falcon9-Data-Science-Capstone/
+|
+|-- dashboard/
+|   |-- README.md
+|   |-- spacex_dashboard.py
+|
+|-- data/
+|   |-- spacex_launches_processed.csv
+|   |-- spacex_web_scraped_cleaned.csv
+|
+|-- maps/
+|   |-- README.md
+|   |-- spacex_classification_map.html
+|   |-- spacex_florida_distance.html
+|   |-- spacex_landing_clusters.html
+|   |-- spacex_launch_sites.html
+|
+|-- notebooks/
+|   |-- 01_SpaceX_Data_Collection.ipynb
+|   |-- 02_SpaceX_Web_Scraping.ipynb
+|   |-- 03_SpaceX_SQL_EDA.ipynb
+|   |-- 04_SpaceX_EDA_Visualization.ipynb
+|   |-- 05_SpaceX_Folium_Geospatial_Analysis.ipynb
+|   |-- 06_SpaceX_Plotly_Dash_Dashboard.ipynb
+|   |-- 07_SpaceX_Machine_Learning.ipynb
+|
+|-- .gitignore
+|-- README.md
+```
+
+*Notebook filenames above represent the intended organization; actual uploaded filenames may differ.*
+
+## Conclusion
+
+This capstone project provided practical experience with the complete data science workflow, from data preparation and analysis to visualization and machine learning.
+
+The machine learning experiments demonstrated that model selection results can differ from performance on unseen data, particularly when working with a small, imbalanced dataset.
+
+The project helped strengthen my understanding of Python, SQL, exploratory data analysis, data visualization, machine learning pipelines, cross-validation, and classification evaluation.
+
+## Author
+
+**Saniya Shaikh**
+
+MCA Student | Data Science and Machine Learning
+
+**Course:** IBM Data Science Professional Certificate — Applied Data Science Capstone
+
+**Platform:** Coursera
