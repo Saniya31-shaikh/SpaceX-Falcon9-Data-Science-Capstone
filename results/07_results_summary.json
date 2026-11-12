@@ -1,0 +1,13 @@
+{
+  "dataset_rows": 90,
+  "train_rows": 72,
+  "test_rows": 18,
+  "class_0_count": 11,
+  "class_1_count": 79,
+  "selected_model": "Decision Tree",
+  "cv_balanced_accuracy": 0.8365384615384617,
+  "test_balanced_accuracy": 0.59375,
+  "test_accuracy": 0.6666666666666666,
+  "test_roc_auc": 0.765625,
+  "test_average_precision": 0.9579861111111111
+}

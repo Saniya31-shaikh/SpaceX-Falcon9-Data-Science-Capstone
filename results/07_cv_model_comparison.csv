@@ -1,0 +1,5 @@
+Model,CV Balanced Accuracy,Best Parameters
+Decision Tree,0.8365384615384617,"{'model__max_depth': 2, 'model__min_samples_leaf': 1}"
+Support Vector Machine,0.6794871794871795,"{'model__C': 10, 'model__kernel': 'linear'}"
+Logistic Regression,0.6564102564102565,{'model__C': 10}
+K-Nearest Neighbors,0.6179487179487181,"{'model__n_neighbors': 3, 'model__weights': 'distance'}"
